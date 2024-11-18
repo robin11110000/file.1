@@ -1,0 +1,37 @@
+import streamlit as st
+import requests  # For API calls if needed
+
+def agrichat_demo():
+    st.title('AgriChat: Agricultural Assistant')
+    
+    # Sidebar for configuration
+    st.sidebar.header('Assistant Settings')
+    crop_type = st.sidebar.selectbox('Select Crop Type', 
+        ['Corn', 'Wheat', 'Rice', 'Soybean', 'Other'])
+    
+    # Main chat interface
+    st.header('Ask Agricultural Questions')
+    user_query = st.text_input('Your Question:', 
+        placeholder='E.g., When should I plant corn?')
+    
+    if st.button('Get Advice'):
+        # Simulated response generation
+        if user_query:
+            response = generate_agricultural_response(user_query, crop_type)
+            st.write(response)
+        else:
+            st.warning('Please enter a question')
+
+def generate_agricultural_response(query, crop):
+    # Mock response generation logic
+    responses = {
+        'corn': 'For corn, the ideal planting time is late April to early May...',
+        'wheat': 'Winter wheat is typically planted in September-October...',
+        # Add more crop-specific responses
+    }
+    
+    return responses.get(crop.lower(), 
+        'General agricultural advice: Consult local agricultural extension for specific recommendations.')
+
+if __name__ == '__main__':
+    agrichat_demo()
